@@ -17,29 +17,27 @@ def decode_jwt_token(token):
         payload = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
         return payload
     except jwt.ExpiredSignatureError:
-        return None  # Token has expired
+        return None 
     except jwt.InvalidTokenError:
-        return None  # Token is invalid
+        return None 
 
 
 def verify_token(token):
-    # Make a request to the auth_service for token verification
     response = requests.get(AUTH_SERVICE_URL, headers={'Authorization': token})
 
     if response.status_code == 200:
-        return True  # Token is valid
+        return True  
     else:
-        return False  # Token is invalid
+        return False 
 
 @user_routes.before_request
 def authenticate_user():
-    if request.endpoint != 'user_routes.register':  # Exclude registration route from authentication
+    if request.endpoint != 'user_routes.register':  
         token = request.headers.get('Authorization')
 
         if not token:
             return jsonify(message="Missing token"), 401
 
-        # Verify token using the auth_service
         if not verify_token(token):
             return jsonify(message="Invalid token"), 401
 
@@ -67,13 +65,11 @@ def get_profile():
     if not token:
         return jsonify(message="Missing token"), 401
 
-    decoded_token = decode_jwt_token(token)  # Example function to decode JWT token
+    decoded_token = decode_jwt_token(token)  
 
     if not decoded_token:
         return jsonify(message="Invalid token"), 401
 
-    # Retrieve user profile based on authentication token
-    # This logic will be implemented using the decoded token (e.g., fetch user data from database)
     username = decoded_token.get('username')
     # Retrieve user profile from database (dummy response for now)
     user_profile = {'username': username, 'email': 'user@example.com'}
@@ -90,8 +86,6 @@ def update_profile():
     if not verify_token(token):
         return jsonify(message="Invalid token"), 401
 
-    # Update user profile based on authentication token
-    # This logic will be implemented using the decoded token (e.g., update user data in database)
     if decode_jwt_token:
         username = decode_jwt_token.get('username')
         # Update user profile in database (dummy response for now)
