@@ -30,7 +30,7 @@ To get started with IAMSecure, follow these steps:
 
 1. **Clone the Repository**: Clone the IAMSecure repository to your local machine.
    ```
-   git clone https://github.com/<username>/IAMSecure.git
+   git clone https://github.com/Nick3344/IAMSecureMicroservices
    ```
 
 2. **Set Up Environment**: Set up the development environment by installing dependencies and configuring environment variables.
