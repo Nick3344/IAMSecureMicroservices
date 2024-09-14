@@ -1,6 +1,3 @@
-Certainly! Here's a draft for the README.md file for your project "IAMSecure":
-
----
 
 # IAMSecure
 
